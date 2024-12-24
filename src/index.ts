@@ -4,7 +4,7 @@ import webpack, { Compilation, Compiler } from 'webpack';
 const cssOnly = (filename: string): boolean =>
     path.extname(filename) === '.css';
 interface RtlCssPluginOptions {
-    filename?: string;
+    filename: string;
 }
 class RtlCssPlugin {
     private readonly options: RtlCssPluginOptions;
@@ -23,13 +23,10 @@ class RtlCssPlugin {
             files.filter(cssOnly).forEach((filename) => {
                 const src = compilation.assets[filename].source().toString(); // Get the asset source
                 const dst = rtlcss.process(src); // Process with rtlcss
-                const dstFileName = compilation.getPath(
-                    this.options.filename!,
-                    {
-                        chunk,
-                        filename
-                    }
-                );
+                const dstFileName = compilation.getPath(this.options.filename, {
+                    chunk,
+                    filename
+                });
 
                 // Add the processed file to assets
                 compilation.assets[dstFileName] = new webpack.sources.RawSource(
@@ -58,4 +55,5 @@ class RtlCssPlugin {
         );
     }
 }
+// noinspection JSUnusedGlobalSymbols
 export default RtlCssPlugin;
