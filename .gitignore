@@ -3,7 +3,6 @@ node_modules
 *npm-debug.log
 target
 maven
-package-lock.json
 coverage
 typings
 .history
@@ -11,3 +10,4 @@ typings
 *.iml
 test/e2e/screenshots
 .yo-rc.json
+.vscode

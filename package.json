@@ -1,51 +1,54 @@
 {
-  "name": "rtlcss-webpack-plugin",
-  "version": "4.0.0",
+  "name": "@smushytaco/rtlcss-webpack-plugin",
+  "version": "1.0.0",
   "license": "MIT",
   "private": false,
-  "author": {
-    "name": "Shahar Talmi",
-    "email": "shahar@wix.com"
-  },
-  "main": "dist/src/index.js",
+  "author": "SmushyTaco",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es6/index.js",
+  "types": "dist/es6/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
+  "engines": {
+    "node": ">=18.12.0",
+    "npm": ">=8.19.2"
+  },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wix/rtlcss-webpack-plugin"
+    "url": "git+https://github.com/SmushyTaco/rtlcss-webpack-plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/SmushyTaco/rtlcss-webpack-plugin/issues"
   },
   "scripts": {
-    "start": "yoshi start",
-    "precommit": "yoshi lint",
-    "pretest": "yoshi build",
-    "test": "yoshi test --mocha",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "build:es6": "tsc --project tsconfig.json",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build": "npm run build:es6 && npm run build:cjs",
+    "prepare": "npm run build"
   },
   "devDependencies": {
-    "babel-plugin-transform-runtime": "~6.23.0",
-    "chai": "~4.1.0",
-    "css-loader": "^1.0.0",
-    "husky": "~0.14.0",
-    "memory-fs": "^0.4.1",
-    "mini-css-extract-plugin": "^0.4.2",
-    "webpack": "^4.17.1",
-    "@wix/yoshi": "^5"
+    "@types/node": "^22.10.2",
+    "@types/rtlcss": "^3.5.4",
+    "@types/babel__plugin-transform-runtime": "^7.9.5",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@eslint/js": "^9.17.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "webpack": "^5.97.1"
   },
   "dependencies": {
-    "babel-runtime": "~6.25.0",
-    "rtlcss": "^3.5.0"
+    "@babel/runtime": "^7.26.0",
+    "rtlcss": "^4.3.0"
   },
-  "babel": {
-    "presets": [
-      "yoshi"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "@wix/eslint-config-yoshi"
+  "exports": {
+    "import": "./dist/es6/index.js",
+    "require": "./dist/cjs/index.js"
   }
 }
