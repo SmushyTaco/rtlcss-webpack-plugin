@@ -3,15 +3,13 @@ import rtlcss from 'rtlcss';
 import webpack, { Compilation, Compiler } from 'webpack';
 const cssOnly = (filename: string): boolean =>
     path.extname(filename) === '.css';
-interface RtlCssPluginOptions {
-    filename: string;
-}
 class RtlCssPlugin {
-    private readonly options: RtlCssPluginOptions;
+    private readonly fileName: string;
 
-    constructor(options: RtlCssPluginOptions = { filename: '[name].rtl.css' }) {
-        this.options = options;
+    constructor(fileName: string = '[name].rtl.css') {
+        this.fileName = fileName;
     }
+
     private readonly processAssets = (
         compilation: Compilation,
         callback: () => void
@@ -21,14 +19,13 @@ class RtlCssPlugin {
         chunks.forEach((chunk) => {
             const files = Array.from(chunk.files);
             files.filter(cssOnly).forEach((filename) => {
-                const src = compilation.assets[filename].source().toString(); // Get the asset source
-                const dst = rtlcss.process(src); // Process with rtlcss
-                const dstFileName = compilation.getPath(this.options.filename, {
+                const src = compilation.assets[filename].source().toString();
+                const dst = rtlcss.process(src);
+                const dstFileName = compilation.getPath(this.fileName, {
                     chunk,
                     filename
                 });
 
-                // Add the processed file to assets
                 compilation.assets[dstFileName] = new webpack.sources.RawSource(
                     dst
                 );

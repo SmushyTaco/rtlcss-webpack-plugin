@@ -45,8 +45,4 @@ This will create the normal `style.css` and an additional `style.rtl.css`.
 new RtlCssPlugin('[name].rtl.css');
 ```
 
-```
-new RtlCssPlugin({filename: '[name].rtl.css'});
-```
-
-* `filename` Name of the result file. May contain [name], [id] and [hash]
+* `fileName` Name of the result file. May contain [name], [id] and [hash]

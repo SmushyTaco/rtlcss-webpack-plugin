@@ -1,6 +1,6 @@
 {
   "name": "@smushytaco/rtlcss-webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "private": false,
   "author": {
@@ -30,9 +30,10 @@
     "url": "https://github.com/SmushyTaco/rtlcss-webpack-plugin/issues"
   },
   "scripts": {
+    "clean": "del-cli dist",
     "build:es6": "tsc --project tsconfig.json",
     "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build": "npm run build:es6 && npm run build:cjs",
+    "build": "npm run clean && npm run build:es6 && npm run build:cjs",
     "prepare": "npm run build"
   },
   "devDependencies": {
@@ -42,7 +43,11 @@
     "@smushytaco/versionchecker": "^1.0.0",
     "prettier": "^3.4.2",
     "typescript": "^5.7.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
     "typescript-eslint": "^8.18.2",
+    "globals": "^15.14.0",
+    "del-cli": "^6.0.0",
     "webpack": "^5.97.1"
   },
   "dependencies": {
