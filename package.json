@@ -1,15 +1,15 @@
 {
   "name": "@smushytaco/rtlcss-webpack-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "private": false,
   "author": {
     "name": "SmushyTaco",
     "email": "personal@nikanradan.com"
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/es6/index.js",
-  "types": "dist/es6/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "LICENSE",
@@ -31,9 +31,7 @@
   },
   "scripts": {
     "clean": "del-cli dist",
-    "build:es6": "tsc --project tsconfig.json",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build": "npm run clean && npm run build:es6 && npm run build:cjs",
+    "build": "npm run clean && tsc",
     "prepare": "npm run build"
   },
   "devDependencies": {
@@ -52,9 +50,5 @@
   },
   "dependencies": {
     "rtlcss": "^4.3.0"
-  },
-  "exports": {
-    "import": "./dist/es6/index.js",
-    "require": "./dist/cjs/index.js"
   }
 }
