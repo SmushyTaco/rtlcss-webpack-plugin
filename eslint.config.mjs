@@ -9,12 +9,31 @@ import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 export default [
     {
         files: ['**/*.ts'],
+        ignores: ['vite.config.ts'],
         languageOptions: {
             globals: globals.node,
             parser: tsParser,
             parserOptions: {
                 sourceType: 'module',
                 project: './tsconfig.json'
+            }
+        },
+        plugins: {
+            '@typescript-eslint': tsEslintPlugin
+        },
+        rules: {
+            ...eslint.configs.recommended.rules,
+            ...tsEslintPlugin.configs.recommended.rules
+        }
+    },
+    {
+        files: ['vite.config.ts'],
+        languageOptions: {
+            globals: globals.node,
+            parser: tsParser,
+            parserOptions: {
+                sourceType: 'module',
+                project: './tsconfig.vite.json'
             }
         },
         plugins: {

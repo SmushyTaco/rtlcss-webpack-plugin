@@ -1,6 +1,6 @@
 {
   "name": "@smushytaco/rtlcss-webpack-plugin",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "license": "MIT",
   "private": false,
@@ -10,11 +10,17 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "files": [
@@ -37,9 +43,8 @@
     "url": "https://github.com/SmushyTaco/rtlcss-webpack-plugin/issues"
   },
   "scripts": {
-    "clean": "del-cli dist",
-    "build:types": "npx tsc --emitDeclarationOnly",
-    "build": "npm run clean && npx tsx esbuild.ts && npm run build:types",
+    "clean": "npx del-cli dist",
+    "build": "npm run clean && npx vite build",
     "prepare": "npm run build"
   },
   "devDependencies": {
@@ -52,8 +57,9 @@
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "typescript-eslint": "^8.18.2",
-    "tsx": "^4.19.2",
-    "esbuild": "^0.24.2",
+    "vite": "^6.0.6",
+    "vite-plugin-tsc-transpile": "^1.0.2",
+    "vite-plugin-dts": "^4.4.0",
     "globals": "^15.14.0",
     "del-cli": "^6.0.0",
     "webpack": "^5.97.1"
