@@ -8,7 +8,7 @@ import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
     {
-        files: ['**/*.ts'],
+        files: ['**/*.ts', '**/*.cts', '**/*.mts'],
         ignores: ['vite.config.ts'],
         languageOptions: {
             globals: globals.node,
@@ -24,6 +24,18 @@ export default [
         rules: {
             ...eslint.configs.recommended.rules,
             ...tsEslintPlugin.configs.recommended.rules
+        }
+    },
+    {
+        files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+        languageOptions: {
+            globals: globals.node,
+            parserOptions: {
+                sourceType: 'module'
+            }
+        },
+        rules: {
+            ...eslint.configs.recommended.rules
         }
     },
     {
