@@ -43,7 +43,7 @@ class RtlCssPlugin {
                 compilation.hooks.processAssets.tapAsync(
                     {
                         name: 'RtlCssPlugin',
-                        stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE
+                        stage: Compilation.PROCESS_ASSETS_STAGE_DERIVED
                     },
                     (_chunks, callback) =>
                         this.processAssets(compilation, callback)
