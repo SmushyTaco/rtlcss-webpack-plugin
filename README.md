@@ -1,4 +1,4 @@
-# RtlCss Webpack Plugin [![Build Status](https://img.shields.io/travis/wix/rtlcss-webpack-plugin/master.svg?style=flat-square)](https://travis-ci.org/wix/rtlcss-webpack-plugin) [![npm version](https://img.shields.io/npm/v/rtlcss-webpack-plugin.svg?style=flat-square)](https://www.npmjs.com/package/rtlcss-webpack-plugin) [![npm downloads](https://img.shields.io/npm/dm/rtlcss-webpack-plugin.svg?style=flat-square)](https://www.npmjs.com/package/rtlcss-webpack-plugin)
+# RtlCss Webpack Plugin
 
 Webpack plugin to use in addition to [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) to create a second css bundle, processed to be rtl.
 
@@ -9,7 +9,7 @@ This is almost entirely based on work done in [webpack-rtl-plugin](https://githu
 ## Installation
 
 ```shell
-$ npm install rtlcss-webpack-plugin
+$ npm install @smushytaco/rtlcss-webpack-plugin
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ $ npm install rtlcss-webpack-plugin
 Add the plugin to your webpack configuration:
 
 ```js
-import RtlCssPlugin from 'rtlcss-webpack-plugin';
+import RtlCssPlugin from '@smushytaco/rtlcss-webpack-plugin';
 
 module.exports = {
   entry: path.join(__dirname, 'src/index.js'),
@@ -33,7 +33,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [new ExtractTextPlugin('style.css'), new RtlCssPlugin('style.rtl.css')]
+  plugins: [new ExtractTextPlugin('style.css'), new RtlCssPlugin()]
 };
 ```
 
@@ -41,12 +41,19 @@ This will create the normal `style.css` and an additional `style.rtl.css`.
 
 ## Options
 
-```
-new RtlCssPlugin('[name].rtl.css');
+```ts
+new RtlCssPlugin({
+    fileNameMap: {
+        '.css': '[name].rtl.css',
+        '.min.css': '[name].rtl.min.css'
+    },
+    sourceMap: true,
+    rtlcssConfig: {
+        autoRename: true
+    }
+});
 ```
 
-```
-new RtlCssPlugin({filename: '[name].rtl.css'});
-```
-
-* `filename` Name of the result file. May contain [name], [id] and [hash]
+* `fileNameMap` is an optional parameter that specifies a map of file extensions to templates for rtl css generation. What's seen in the example is the default.
+* `sourceMap` is an optional parameter that specifies if sourcemaps should be generated. If this isn't specified it'll default to `false`.
+* `rtlcssConfig` is an optional parameter that comes from the `rtlcss` package that's used by this plugin to configure `rtlcss`.

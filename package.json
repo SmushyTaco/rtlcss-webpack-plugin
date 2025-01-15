@@ -1,51 +1,73 @@
 {
-  "name": "rtlcss-webpack-plugin",
-  "version": "4.0.0",
+  "name": "@smushytaco/rtlcss-webpack-plugin",
+  "version": "2.0.0",
+  "type": "module",
   "license": "MIT",
   "private": false,
   "author": {
-    "name": "Shahar Talmi",
-    "email": "shahar@wix.com"
+    "name": "SmushyTaco",
+    "email": "personal@nikanradan.com"
   },
-  "main": "dist/src/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
+  "engines": {
+    "node": ">=18.12.0",
+    "npm": ">=8.19.2"
+  },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wix/rtlcss-webpack-plugin"
+    "url": "git+https://github.com/SmushyTaco/rtlcss-webpack-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SmushyTaco/rtlcss-webpack-plugin/issues"
   },
   "scripts": {
-    "start": "yoshi start",
-    "precommit": "yoshi lint",
-    "pretest": "yoshi build",
-    "test": "yoshi test --mocha",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-runtime": "~6.23.0",
-    "chai": "~4.1.0",
-    "css-loader": "^1.0.0",
-    "husky": "~0.14.0",
-    "memory-fs": "^0.4.1",
-    "mini-css-extract-plugin": "^0.4.2",
-    "webpack": "^4.17.1",
-    "@wix/yoshi": "^5"
+    "clean": "npx del-cli dist",
+    "build": "npm run clean && npx vite build",
+    "prepare": "npm run build"
   },
   "dependencies": {
-    "babel-runtime": "~6.25.0",
-    "rtlcss": "^3.5.0"
+    "postcss": "^8.5.1",
+    "rtlcss": "^4.3.0"
   },
-  "babel": {
-    "presets": [
-      "yoshi"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "@wix/eslint-config-yoshi"
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "@types/rtlcss": "^3.5.4",
+    "@eslint/js": "^9.18.0",
+    "@smushytaco/versionchecker": "^1.0.5",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "typescript-eslint": "^8.20.0",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "vite": "^6.0.7",
+    "vite-plugin-tsc-transpile": "^1.0.4",
+    "vite-plugin-dts": "^4.5.0",
+    "globals": "^15.14.0",
+    "del-cli": "^6.0.0",
+    "webpack": "^5.97.1"
   }
 }
